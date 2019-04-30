@@ -4,15 +4,15 @@ const { html, Component, render } = require('htm/preact')
 const mermaid = require('mermaid')
 
 const renderer = new marked.Renderer()
-renderer.code = (code, language) => {
-  if (language === 'mermaid') return '<pre class="mermaid">' + code + '</pre>'
-  else return '<pre><code>' + code + '</code></pre>'
+renderer.code = (code, lang) => {
+  if (lang === 'mermaid') return `<pre class="mermaid">${code}</pre>`
+  if (!lang) return `<pre><code>${code}</code></pre>`
+  return `<pre><code>${
+    require('highlight.js').highlightAuto(code).value
+  }</code></pre>`
 }
 marked.setOptions({
   renderer,
-  highlight: code => {
-    return require('highlight.js').highlightAuto(code).value
-  },
   pedantic: false,
   gfm: true,
   tables: true,
@@ -35,7 +35,11 @@ class App extends Component {
         {
           markdown: marked(file, { baseUrl: `${basePath}/` })
         },
-        () => mermaid.init()
+        () => {
+          try {
+            mermaid.init()
+          } catch (e) {}
+        }
       )
     })
   }
