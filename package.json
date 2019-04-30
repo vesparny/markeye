@@ -1,0 +1,38 @@
+{
+  "name": "markeye",
+  "productName": "Markeye",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "repository": "user/repo",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --asar --overwrite --platform=darwin"
+  },
+  "dependencies": {
+    "electron-debug": "^2.0.0",
+    "electron-window": "^0.8.1",
+    "electron-window-state": "^5.0.3",
+    "htm": "^2.1.1",
+    "marked": "^0.6.2",
+    "preact": "^8.4.2"
+  },
+  "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
