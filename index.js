@@ -1,27 +1,9 @@
-const { app, Menu, dialog, BrowserWindow, shell } = require('electron')
+const { app, Menu, shell } = require('electron')
 const windowStateKeeper = require('electron-window-state')
 const w = require('electron-window')
-const fs = require('fs')
-const path = require('path')
-
+const createMenu = require('./create-menu')
+const actions = require('./actions')
 let fileToLaod = null
-
-function loadAndWathcFileForChanges(filePath, win) {
-  fs.readFile(filePath, 'utf-8', (err, file) => {
-    if (err) return cb(err)
-    win.setTitle('Markeye - ' + filePath)
-    win.webContents.send('M::file-loaded', {
-      file,
-      filePath,
-      basePath: path.dirname(filePath)
-    })
-    unwatchAll()
-    watched.push(filePath)
-    fs.watchFile(filePath, { interval: 100 }, () => {
-      loadAndWathcFileForChanges(filePath, win)
-    })
-  })
-}
 
 app.on('open-file', (event, path) => {
   if (app.isReady()) {
@@ -31,55 +13,20 @@ app.on('open-file', (event, path) => {
   }
 })
 
-let watched = []
 // Adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')()
 
-function openExternal(e, url) {
+function openExternal (e, url) {
   e.preventDefault()
   shell.openExternal(url)
 }
 
-function unwatchAll() {
-  watched.forEach(fs.unwatchFile)
-}
-
-function ready() {
+function ready () {
   createWindow(fileToLaod)
 }
 
-var showOpen = function(menuItem, browserWindow) {
-  dialog.showOpenDialog(
-    {
-      properties: ['openFile'],
-      filters: [{ name: 'markdown', extensions: ['md', 'markdown'] }]
-    },
-    paths => {
-      loadAndWathcFileForChanges(paths[0], browserWindow)
-    }
-  )
-}
-
-var template = [
-  {
-    label: 'File',
-    submenu: [
-      {
-        label: 'Open',
-        accelerator: 'CmdOrCtrl+O',
-        click: showOpen
-      },
-      {
-        label: 'Quit',
-        accelerator: 'Cmd+Q',
-        role: 'quit'
-      }
-    ]
-  }
-]
-
-function createWindow(file) {
-  const menu = Menu.buildFromTemplate(template)
+function createWindow (file) {
+  const menu = Menu.buildFromTemplate(createMenu(app))
   let mainWindowState = windowStateKeeper({
     defaultWidth: 1000,
     defaultHeight: 800
@@ -92,7 +39,7 @@ function createWindow(file) {
   })
   win.showUrl(`${__dirname}/index.html`, () => {
     if (file) {
-      loadAndWathcFileForChanges(file, win)
+      actions.loadAndWathcFileForChanges(file, win)
     } else {
       win.setTitle('Markeye')
     }

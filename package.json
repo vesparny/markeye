@@ -1,32 +1,35 @@
 {
   "name": "markeye",
   "productName": "Markeye",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1-beta",
+  "description": "A simple markdown viewer",
   "license": "MIT",
-  "repository": "user/repo",
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
+  "repository": "vesparny/markeye",
   "scripts": {
     "test": "xo",
     "start": "electron .",
-    "build": "electron-packager . --out=dist --asar --overwrite --platform=darwin"
+    "build": "electron-packager . --out=dist --asar --overwrite --platform=darwin",
+    "format": "prettier-standard './**/*.js'"
   },
   "dependencies": {
     "electron-debug": "^2.0.0",
     "electron-window": "^0.8.1",
     "electron-window-state": "^5.0.3",
+    "github-markdown-css": "^3.0.1",
+    "highlight.js": "^9.15.6",
     "htm": "^2.1.1",
     "marked": "^0.6.2",
+    "mermaid": "^8.0.0",
     "preact": "^8.4.2"
   },
   "devDependencies": {
     "devtron": "^1.4.0",
     "electron": "^2.0.2",
     "electron-packager": "^12.1.0",
+    "husky": "^2.1.0",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
+    "prettier-standard": "^9.1.1",
     "xo": "^0.21.1"
   },
   "xo": {
@@ -34,5 +37,18 @@
       "node",
       "browser"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "prettier-standard",
+        "git add"
+      ]
+    }
   }
 }
