@@ -1,4 +1,5 @@
 const marked = require('marked')
+const fm = require('front-matter')
 const { ipcRenderer } = require('electron')
 const { html, Component, render } = require('htm/preact')
 const mermaid = require('mermaid')
@@ -31,9 +32,10 @@ class App extends Component {
 
   componentDidMount () {
     ipcRenderer.on('M::file-loaded', (e, { file, filePath, basePath }) => {
+      const content = fm(file)
       this.setState(
         {
-          markdown: marked(file, { baseUrl: `${basePath}/` })
+          markdown: marked(content.body, { baseUrl: `${basePath}/` })
         },
         () => {
           try {
