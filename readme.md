@@ -56,4 +56,4 @@ $ yarn build
 
 ## License
 
-MIT. Copyright (c) [Alessandro Arnodo](https://alessandro.arnodo.net).
+MIT. Copyright (c) [Alessandro Arnodo](https://arnodo.net).
