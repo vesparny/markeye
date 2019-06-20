@@ -10,7 +10,7 @@ function unwatchAll () {
 
 function loadAndWathcFileForChanges (filePath, win) {
   fs.readFile(filePath, 'utf-8', (err, file) => {
-    if (err) return cb(err)
+    if (err) return
     win.setTitle('Markeye - ' + filePath)
     win.webContents.send('M::file-loaded', {
       file,

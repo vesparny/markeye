@@ -17,7 +17,6 @@
 
 You can download the latest version from the [releases](https://github.com/vesparny/markeye/releases) page.
 
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82070/59842578-1711ef80-9357-11e9-8682-4403b1076fa8.gif" style="max-width:100%" alt="screenshot" align="center">
 </p>
@@ -28,7 +27,6 @@ You can download the latest version from the [releases](https://github.com/vespa
 - Syntax highlighting
 - Emoji Support
 - Mermaid charts support
-
 
 ## How to Contribute
 

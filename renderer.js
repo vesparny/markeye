@@ -46,7 +46,7 @@ class App extends Component {
     })
   }
 
-  render ({}, { markdown }) {
+  render (props, { markdown }) {
     return html`
       <div
         class="markdown-body"
