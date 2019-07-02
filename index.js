@@ -31,7 +31,11 @@ function createWindow (file) {
     defaultWidth: 1000,
     defaultHeight: 800
   })
+  // eslint-disable-next-line
   const win = new w.createWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
