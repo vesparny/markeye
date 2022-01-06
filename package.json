@@ -18,7 +18,7 @@
     "highlight.js": "^9.15.6",
     "htm": "^2.1.1",
     "marked": "^0.6.2",
-    "mermaid": "^8.0.0",
+    "mermaid": "^8.13.8",
     "preact": "^8.4.2"
   },
   "devDependencies": {
