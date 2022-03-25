@@ -24,7 +24,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "devtron": "^1.4.0",
-    "electron": "^5.0.4",
+    "electron": "^13.6.6",
     "electron-packager": "^13.1.1",
     "husky": "^2.1.0",
     "lint-staged": "^8.1.5",
